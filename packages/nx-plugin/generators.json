@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "mfe-app": {
+      "factory": "./dist/generators/mfe-app/mfe-app",
+      "schema": "./dist/generators/mfe-app/schema.json",
+      "description": "Scaffold an accessible Angular Microfrontend app"
+    }
+  }
+}
