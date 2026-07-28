@@ -1,0 +1,10 @@
+import { ModuleFederationConfig } from '@nx/module-federation';
+
+const config: ModuleFederationConfig = {
+  name: '<%= name %>',
+  exposes: {
+    './Module': './apps/<%= name %>/src/app/app.component.ts',
+  },
+};
+
+export default config;

@@ -1,25 +1,52 @@
 import {
-  addProjectConfiguration,
+  Tree,
   formatFiles,
   generateFiles,
-  type Tree,
+  joinPathFragments,
+  names,
+  installPackagesTask
 } from '@nx/devkit';
-import * as path from 'path';
-import type { MfeAppGeneratorSchema } from './schema';
+import { applicationGenerator } from '@nx/angular/generators';
+import { MfeAppGeneratorSchema } from './schema';
 
 export async function mfeAppGenerator(
   tree: Tree,
-  options: MfeAppGeneratorSchema,
+  options: MfeAppGeneratorSchema
 ) {
-  const projectRoot = `libs/${options.name}`;
-  addProjectConfiguration(tree, options.name, {
-    root: projectRoot,
-    projectType: 'library',
-    sourceRoot: `${projectRoot}/src`,
-    targets: {},
+  const normalizedNames = names(options.name);
+  const appProjectRoot = `apps/${normalizedNames.fileName}`;
+
+  // 1. Generate standard Angular 21 Application via @nx/angular
+  await applicationGenerator(tree, {
+    name: normalizedNames.fileName,
+    style: 'scss',
+    routing: true,
+    standalone: true,
+    inlineStyle: true,
+    inlineTemplate: true,
+    directory: appProjectRoot,
+    unitTestRunner: 'jest',
+    e2eTestRunner: 'cypress',
+    zoneless: true
   });
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, options);
+
+  // 2. Inject template files (Accessibility standards & Module Federation config)
+  generateFiles(
+    tree,
+    joinPathFragments(__dirname, 'files'),
+    appProjectRoot,
+    {
+      ...options,
+      ...normalizedNames,
+      tmpl: ''
+    }
+  );
+
   await formatFiles(tree);
+
+  return () => {
+    installPackagesTask(tree);
+  };
 }
 
 export default mfeAppGenerator;

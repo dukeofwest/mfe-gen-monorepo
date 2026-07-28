@@ -1,17 +1,25 @@
 {
   "$schema": "https://json-schema.org/schema",
   "$id": "MfeApp",
-  "title": "",
+  "title": "MFE Application Generator Options",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      },
-      "x-prompt": "What name would you like to use?"
+      "description": "Name of the Microfrontend Application",
+      "$default": { "$source": "argv", "index": 0 },
+      "x-prompt": "What is the name of the Microfrontend Remote application?"
+    },
+    "port": {
+      "type": "number",
+      "description": "Dev server port for the Microfrontend remote app",
+      "default": 4201,
+      "x-prompt": "Which port should this MFE run on locally?"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Tags to use for linting (comma-separated)",
+      "x-prompt": "Add tags for Nx module boundaries (optional):"
     }
   },
   "required": ["name"]
