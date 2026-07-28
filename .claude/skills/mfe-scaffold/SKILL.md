@@ -1,35 +1,23 @@
 ---
 name: mfe-scaffold
-description: Scaffolds an accessible, tested Angular Microfrontend remote module inside the Nx monorepo.
+description: Scaffolds an accessible, tested Angular 21 Microfrontend remote module inside the Nx monorepo.
 disable-model-invocation: false
 ---
 
-# MFE Scaffolding Skill
+# MFE Scaffolding Skill (Angular 21)
 
 When generating or assisting with a new Microfrontend module:
 
-## 1. Structural Standards
-- Ensure all components are Angular Standalone components.
-- Use `inject()` function for dependency injection instead of constructor injection.
-- Prefer Angular Signals (`signal()`, `computed()`) for local reactive state.
+## 1. Structural Standards (Angular 21)
+- Ensure all components are Angular Standalone components with Zoneless change detection enabled (`provideZonelessChangeDetection()`).
+- Use `inject()` function for dependency injection.
+- Use Angular Signals (`signal()`, `computed()`, `input()`, `output()`) for reactive state.
 
 ## 2. Accessibility Standard Requirements (WCAG 2.1 AA)
 - Wrap root templates in landmark elements (`<main role="main">`, `<header>`, `<nav>`).
-- Ensure all interactive elements (buttons, inputs) have accessible labels (`aria-label`, `aria-labelledby`).
-- Add keyboard event listeners (`(keydown.enter)` / `(keydown.space)`) for custom interactive controls.
+- Ensure all interactive elements have explicit accessible labels (`aria-label`, `aria-labelledby`).
+- Support full keyboard navigation.
 
 ## 3. Automated Test Generation
-- Include a `jest-axe` test block in `.spec.ts` files:
-  ```ts
-  it('should have no accessibility violations', async () => {
-    const { container } = render(AppComponent);
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
-  });
-
-  it('should pass accessibility checks on mount', () => {
-    cy.visit('/');
-    cy.injectAxe();
-    cy.checkA11y();
-  });
-  ```
+- Include a unit testing `axe` check block in `.spec.ts` files.
+- Include a `cypress-axe` E2E test block for mounting checks.

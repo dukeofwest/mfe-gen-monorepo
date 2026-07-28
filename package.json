@@ -5,6 +5,8 @@
   "scripts": {},
   "private": true,
   "devDependencies": {
+    "@angular/cli": "^21.2.19",
+    "@angular/compiler-cli": "^21.2.18",
     "@nx/angular": "^23.1.0",
     "@nx/js": "^23.1.0",
     "@nx/plugin": "^23.1.0",
@@ -15,9 +17,16 @@
     "nx": "23.1.0",
     "prettier": "^3.8.1",
     "tslib": "^2.3.0",
-    "typescript": "~6.0.3"
+    "typescript": "~5.6.0"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@angular/common": "^21.2.18",
+    "@angular/compiler": "^21.2.18",
+    "@angular/core": "^21.2.18",
+    "@angular/platform-browser": "^21.2.18",
+    "@angular/router": "^21.2.18"
+  }
 }

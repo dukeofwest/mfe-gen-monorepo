@@ -1,19 +1,19 @@
 # AI-Assisted Microfrontend Generator Workspace
 
 ## Project Overview
-An enterprise-grade Nx monorepo utilizing Angular 18+, Module Federation, and automated accessibility (a11y) quality gates.
+An enterprise-grade Nx monorepo utilizing Angular 21, Module Federation, Zoneless Change Detection, and automated accessibility (a11y) quality gates.
 
 ## Core Architecture Principles
 1. **Frontend Architecture:**
-   - Framework: Angular 18+ (Standalone Components, Signals, RxJS).
+   - Framework: Angular 21+ (Zoneless by default, Standalone Components, Signals & Signal Forms, RxJS).
    - Microfrontends: @angular-architects/module-federation.
    - Monorepo Tooling: Nx.
    - Code Style: Strict TypeScript (`strict: true`), ESLint, Prettier.
 
 2. **Mandatory Quality Gates:**
-   - **Accessibility (a11y):** All generated components must comply with WCAG 2.1 Level AA. Standard automated checks must use `jest-axe` for unit tests and `cypress-axe` for E2E tests.
-   - **Unit Testing:** Minimum 80% coverage on new components/services using Jest.
-   - **State Management:** Angular Signals for local state; RxJS for asynchronous data flows.
+   - **Accessibility (a11y):** All generated components must comply with WCAG 2.1 Level AA. Automated checks use `jest-axe` / `vitest-axe` for unit tests and `cypress-axe` for E2E tests.
+   - **Unit Testing:** Minimum 80% coverage on new components/services.
+   - **State Management:** Angular Signals for state; RxJS for asynchronous event streams.
 
 ## Common CLI Commands
 - Build workspace: `npx nx run-many -t build`
