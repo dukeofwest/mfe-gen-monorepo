@@ -42,4 +42,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage
-          path: coverage/
+          path: apps/analytics-mfe/test-output/jest/coverage/
+          if-no-files-found: ignore
