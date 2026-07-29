@@ -11,7 +11,9 @@ An enterprise-grade Nx Monorepo architecture demonstrating **Zoneless Angular 21
 ---
 
 ## 🏛️ Architecture Overview
-┌─────────────────────────┐
+
+```text
+                      ┌─────────────────────────┐
                       │   Claude Code / AI      │
                       │ (.claude/skills/mfe-scaffold)
                       └────────────┬────────────┘
@@ -37,6 +39,7 @@ An enterprise-grade Nx Monorepo architecture demonstrating **Zoneless Angular 21
                                        │  Automated Quality Gate │
                                        │  jest-axe + cypress-axe │
                                        └─────────────────────────┘
+```
 
 ---
 
