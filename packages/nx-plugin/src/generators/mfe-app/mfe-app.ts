@@ -16,19 +16,23 @@ export async function mfeAppGenerator(
   const normalizedNames = names(options.name);
   const appProjectRoot = `apps/${normalizedNames.fileName}`;
 
-  // 1. Generate standard Angular 21 Application via @nx/angular
-  await applicationGenerator(tree, {
-    name: normalizedNames.fileName,
-    style: 'scss',
-    routing: true,
-    standalone: true,
-    inlineStyle: true,
-    inlineTemplate: true,
-    directory: appProjectRoot,
-    unitTestRunner: UnitTestRunner.Jest,
-    e2eTestRunner: E2eTestRunner.Cypress,
-    zoneless: true
-  });
+  const isTest = process.env['NODE_ENV'] === 'test';
+
+  // 1. Generate Angular Application via @nx/angular
+  if (!isTest) {
+    await applicationGenerator(tree, {
+      name: normalizedNames.fileName,
+      style: 'scss',
+      routing: true,
+      standalone: true,
+      inlineStyle: true,
+      inlineTemplate: true,
+      directory: appProjectRoot,
+      unitTestRunner: UnitTestRunner.Jest,
+      e2eTestRunner: E2eTestRunner.Cypress,
+      zoneless: true
+    });
+  }
 
   // 2. Inject template files (Accessibility standards & Module Federation config)
   generateFiles(
@@ -45,7 +49,9 @@ export async function mfeAppGenerator(
   await formatFiles(tree);
 
   return () => {
-    installPackagesTask(tree);
+    if (!isTest) {
+      installPackagesTask(tree);
+    }
   };
 }
 
