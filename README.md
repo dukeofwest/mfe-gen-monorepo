@@ -1,107 +1,132 @@
-# New Nx Repository
+# 🚀 Enterprise Angular 21 Microfrontend Engine (`mfe-gen-monorepo`)
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+[![CI & Quality Gates](https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/actions)
+[![Angular](https://img.shields.io/badge/Angular-v21-dd0031.svg?style=flat&logo=angular)](https://angular.io/)
+[![Nx Monorepo](https://img.shields.io/badge/Nx-Monorepo-14a1c0.svg?style=flat&logo=nx)](https://nx.dev/)
+[![Accessibility](https://img.shields.io/badge/A11y-WCAG%202.1%20AA-blue.svg)](https://www.w3.org/WAI/standards-guidelines/wcag/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+An enterprise-grade Nx Monorepo architecture demonstrating **Zoneless Angular 21**, **Module Federation microfrontend orchestration**, **AI-assisted developer tooling via Claude Code Skills**, and **automated WCAG 2.1 AA accessibility quality gates** (`jest-axe` & `cypress-axe`).
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/docs/technologies/typescript/introduction?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
-🚀 If you haven't connected to Nx Cloud yet, [complete your setup here](https://cloud.nx.app/get-started). Get faster builds with remote caching, distributed task execution, and self-healing CI. [See how your workspace can benefit](#nx-cloud).
-## Generate a library
+---
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+## 🏛️ Architecture Overview
+┌─────────────────────────┐
+                      │   Claude Code / AI      │
+                      │ (.claude/skills/mfe-scaffold)
+                      └────────────┬────────────┘
+                                   │ Scaffolds via
+                                   ▼
+                      ┌─────────────────────────┐
+                      │   @mfe-gen/nx-plugin    │
+                      │   (Nx Plugin Generator) │
+                      └────────────┬────────────┘
+                                   │ Generates Remote
+                                   ▼
+ ┌──────────────────────────────────────────────────────────────────┐
+ │                      Nx Monorepo Workspace                       │
+ │                                                                  │
+ │  ┌───────────────────────┐          ┌─────────────────────────┐  │
+ │  │     apps/shell        │ ◄─────── │   apps/analytics-mfe    │  │
+ │  │  (Host Application)   │ Module   │   (Remote MFE App)      │  │
+ │  └───────────────────────┘ Fed.     └────────────┬────────────┘  │
+ └──────────────────────────────────────────────────│───────────────┘
+                                                    │ Audited by
+                                                    ▼
+                                       ┌─────────────────────────┐
+                                       │  Automated Quality Gate │
+                                       │  jest-axe + cypress-axe │
+                                       └─────────────────────────┘
+
+---
+
+## 🌟 Key Features
+
+* **⚡ Angular 21 Zoneless & Reactive Signals:** Built using native fine-grained reactivity (`signal()`, `computed()`) without Zone.js runtime overhead.
+* **🧩 Custom Nx Plugin Generator (`@mfe-gen/nx-plugin`):** Automated microfrontend factory that generates production-ready remote applications with standard Module Federation setups and pre-baked testing.
+* **🤖 AI-Integrated Tooling (Claude Code Skills):** Features embedded workspace instructions (`CLAUDE.md`) and declarative scaffolding skills (`.claude/skills/mfe-scaffold`) for natural language application generation.
+* **♿ Automated WCAG 2.1 AA Compliance:** Quality gates baked into both Unit/Component tests (`jest-axe`) and End-to-End browser runs (`cypress-axe`).
+* **🛡️ Zero-Warning CI/CD Pipeline:** Fully automated GitHub Actions workflow enforcing strict type checking, unit/integration testing, accessibility validation, and production builds with remote caching support.
+
+---
+
+## 🛠️ Monorepo Project Structure
+
+```text
+├── apps/
+│   ├── analytics-mfe/          # Generated Angular 21 Remote MFE App
+│   │   ├── src/app/            # Zoneless Signal-based component with landmark tags
+│   │   ├── module-federation.config.ts # Remote entry point export definition
+│   │   └── jest.config.cts     # Unit tests integrated with jest-axe
+│   └── analytics-mfe-e2e/      # Cypress E2E suite integrated with cypress-axe
+│
+├── packages/
+│   └── nx-plugin/              # Custom Nx Generator Plugin (@mfe-gen/nx-plugin)
+│       └── src/generators/mfe-app/
+│           ├── mfe-app.ts      # Scaffolding orchestration logic
+│           └── files/          # Templated WCAG-compliant remote app files
+│
+├── .claude/
+│   └── skills/mfe-scaffold/    # Declarative Claude Code generator skills
+├── .github/workflows/ci.yml    # Continuous Integration pipeline script
+└── CLAUDE.md                   # AI Assistant architectural guidelines & standard rules
 ```
 
-## Run tasks
+---
 
-To build the library use:
+## 🚀 Quick Start & Usage
 
-```sh
-npx nx run pkg1:build
+### 1. Prerequisites & Installation
+
+Ensure Node.js v22+ is installed:
+
+```bash
+git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git
+cd mfe-gen-monorepo
+npm install
 ```
 
-To run any task with Nx use:
+### 2. Scaffold a New Microfrontend Remote App
 
-```sh
-npx nx run <project-name>:<target>
+Run the custom Nx generator command directly:
+
+```bash
+npx nx generate @mfe-gen/nx-plugin:mfe-app order-mfe --port=4203
 ```
 
-These targets are either [inferred automatically](https://nx.dev/docs/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+This automatically generates:
 
-[More about running tasks in the docs &raquo;](https://nx.dev/docs/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- Standalone, Zoneless Angular 21 component with WCAG 2.1 AA accessible semantics.
+- `jest-axe` automated accessibility unit test assertions.
+- Exposed Module Federation remote configuration.
 
-## Versioning and releasing
+### 3. Run Quality Gates & Tests
 
-To version and release the library use
+Execute full monorepo testing, accessibility validation, and build checks:
 
-```
-npx nx release
-```
+```bash
+# Run Unit & jest-axe Accessibility Tests across all projects
+npx nx run-many -t test --coverage
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](https://nx.dev/docs/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
+# Build all applications for production
+npx nx run-many -t build --prod
 ```
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+---
 
-```sh
-npx nx sync:check
-```
+## 🚦 Continuous Integration (GitHub Actions)
 
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
+The repository uses GitHub Actions to enforce non-breaking quality gates on every commit or PR:
 
-## Nx Cloud
+| Quality Gate | Tooling | Target |
+|---|---|---|
+| Typecheck | `tsc --noEmit` | Workspace packages & apps |
+| Unit & A11y Audit | Jest + jest-axe | Automated WCAG AA component validation |
+| Production Build | Nx Esbuild / Angular Compiler | Zero-warning production artifacts |
+| Caching | Nx Cloud / Local Cache | Optimized pipeline performance |
 
-Nx Cloud ensures a [fast and scalable CI](https://nx.dev/nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+---
 
-- [Remote caching](https://nx.dev/docs/features/ci-features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/docs/features/ci-features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/docs/features/ci-features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/docs/features/ci-features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 📄 License
 
-### Set up CI (non-Github Actions CI)
-
-**Note:** This is only required if your CI provider is not GitHub Actions.
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/docs/features/ci-features?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/docs/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## 🔗 Learn More
-
-- [Nx Documentation](https://nx.dev/docs)
-- [Crafting Your Workspace Tutorial](https://nx.dev/docs/getting-started/tutorials/crafting-your-workspace)
-- [Module Boundaries](https://nx.dev/docs/features/enforce-module-boundaries)
-- [Releasing Packages](https://nx.dev/docs/features/manage-releases)
-- [Nx Plugins](https://nx.dev/docs/concepts/nx-plugins)
-- [Nx Cloud](https://nx.dev/nx-cloud)
-
-## 💬 Community
-
-Join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [X (Twitter)](https://twitter.com/nxdevtools)
-- [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [YouTube](https://www.youtube.com/@nxdevtools)
-- [Blog](https://nx.dev/blog)
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
