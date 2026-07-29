@@ -2,7 +2,7 @@
   "name": "@mfe-gen/nx-plugin",
   "version": "0.0.1",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -32,6 +32,11 @@
             {
               "input": "./packages/nx-plugin/src",
               "glob": "**/!(*.ts)",
+              "output": "."
+            },
+            {
+              "input": "./packages/nx-plugin/src",
+              "glob": "**/*.template",
               "output": "."
             },
             {

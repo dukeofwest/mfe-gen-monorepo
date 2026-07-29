@@ -8,6 +8,9 @@
     },
     {
       "path": "./packages/nx-plugin"
+    },
+    {
+      "path": "./apps/analytics-mfe-e2e"
     }
   ],
   "compilerOptions": {}
