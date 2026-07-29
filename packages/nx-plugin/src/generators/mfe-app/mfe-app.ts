@@ -6,8 +6,8 @@ import {
   names,
   installPackagesTask
 } from '@nx/devkit';
-import { applicationGenerator } from '@nx/angular/generators';
-import { MfeAppGeneratorSchema } from './schema';
+import { applicationGenerator, UnitTestRunner, E2eTestRunner } from '@nx/angular/generators';
+import { MfeAppGeneratorSchema } from './schema.js';
 
 export async function mfeAppGenerator(
   tree: Tree,
@@ -25,8 +25,8 @@ export async function mfeAppGenerator(
     inlineStyle: true,
     inlineTemplate: true,
     directory: appProjectRoot,
-    unitTestRunner: 'jest',
-    e2eTestRunner: 'cypress',
+    unitTestRunner: UnitTestRunner.Jest,
+    e2eTestRunner: E2eTestRunner.Cypress,
     zoneless: true
   });
 
